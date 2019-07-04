@@ -51,5 +51,11 @@
 // }
 // console.log(bytesToSize(parseInt(size)));
 
-var test = Number('123aa');
-console.log(test);
+// var test = Number('123aa');
+// console.log(test);
+var s1 = Symbol('test');
+// console.log(typeof s);
+// console.log(s.toString());
+let a = {};
+a[s1] = 123;
+console.log(a[s1]);
