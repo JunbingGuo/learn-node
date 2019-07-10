@@ -55,6 +55,7 @@
 // console.log(test);
 var s1 = Symbol('test');
 // console.log(typeof s);
+
 // console.log(s.toString());
 let a = {};
 a[s1] = 123;
