@@ -1,15 +1,18 @@
 // function* hello() {
-//     yield 'hello';
-//     yield 'world';
-//     return 'ending';
+//   console.log('1')
+//   yield 'hello';
+//   console.log('2')
+
+// const e = require('express');
+
+//   yield 'world' ? console.log('3') : 'qqq';
+  
+
+//   return 'end';
+//   // yield 'end';
 // }
 
-// const ss = hello();
 
-// console.log(ss.next());
-// console.log(ss.next());
-// console.log(ss.next());
-// console.log(ss.next());
 
 // function* f() {
 //     console.log('ceshi');
@@ -22,19 +25,22 @@
 // function* demo() {
 //     let one = '';
 //     // console.log(one, '0')
-//     one = yield 1;
-//     console.log(one, '2');
-//     one = yield 2;
-//     console.log(one, '3');
-//     one = yield 3;
-//     console.log(one, '4');
-//     one = yield 4;
-//     console.log(one, '5');
-//     // console.log('hello,' + (yield 123));
-//     // console.log('hello,' + (yield 456));
+//     // one = yield 1;
+//     // console.log(one, '2');
+//     // one = yield 2;
+//     // console.log(one, '3');
+//     // one = yield 3;
+//     // console.log(one, '4');
+//     // one = yield 4;
+//     // console.log(one, '5');
+//     console.log('hello,' + (yield 123));
+//     console.log('hello,' + (yield 456));
 // }
 
 // const de = demo();
+// console.log(de.next());
+// console.log(de.next());
+// console.log(de.next());
 // console.log(de.next(1));
 // console.log(de.next(2));
 // console.log(de.next(3));
@@ -42,28 +48,53 @@
 // console.log(de.next());
 // de.next();
 
-// var myIterable = {};
+// function* gen(){
+//   yield 1;
+//   yield 2;
+//   yield 3;
+// }
 
+// const gg = gen();
+// console.log([...gg]);
+// for (let i of gg) {
+//   console.log(i)
+// }
+// console.log(gg.next())
+// var myIterable = {};
 // myIterable[Symbol.iterator] = function* () {
 //     yield 1;
 //     yield 2;
 //     yield 3;
 // }
-
 // console.log([...myIterable]);
+
 // function* f() {
-//     for(var i = 0; true; i++) {
-//       var reset = yield i;
-//       console.log(reset);
-//       if(reset) { i = -1; }
-//     }
+//   for(var i = 0; true; i++) {
+//     var reset = yield i;
+//     console.log(reset);
+//     debugger
+//     if(reset) { i = -1; }
 //   }
-  
-//   var g = f();
-//   console.log(g.next());
-//   console.log(g.next(67));
-//   console.log(g.next());
-//   console.log(g.next(90));
+// }
+// var g = f();
+// console.log(g.next());
+// console.log(g.next());
+// console.log(g.next(67));
+// console.log(g.next());
+// console.log(g.next(90));
+
+// function* cons() {
+//   console.log('start');
+//   console.log(`1. ${yield}`);
+//   console.log(`2. ${yield}`);
+//   return 'end';
+// }
+
+// var con = cons();
+// console.log(con.next())
+// console.log(con.next('a'))
+// console.log(con.next('b'))
+// console.log(con.next('c'))
 
 // function wrapper(generatorFunction) {
 //     return function (...args) {
@@ -104,13 +135,37 @@
   
 //   var i = g();
 //   i.next();
+//   // i.throw(new Error('error'))
   
 //   try {
 //     i.throw('a');
 //     i.throw('b');
 //   } catch (e) {
 //     console.log('外部捕获', e);
-//   }
+  // }
+
+
+  // var g = function* () {
+  //   while (true) {
+  //     try {
+  //       yield;
+  //     } catch (e) {
+  //       if (e != 'a') throw e;
+  //       console.log('内部捕获', e);
+  //     }
+  //   }
+  // };
+  
+  // var i = g();
+  // i.next();
+  
+  // try {
+  //   i.throw('a')
+  //   throw new Error('a');
+  //   throw new Error('b');
+  // } catch (e) {
+  //   console.log('外部捕获', e);
+  // }
 // var g = function* () {
 //     try {
 //       yield;
@@ -143,7 +198,7 @@
 //   var g = gen();
 //   g.next() // a
 //   g.throw('s') // b
-//   g.next() // c
+//   console.log(g.next()) // c
 
 // function* g() {
 //     yield 1;
@@ -155,24 +210,26 @@
   
 //   function log(generator) {
 //     var v;
+//     var v2;
+//     // debugger
 //     console.log('starting generator');
 //     try {
 //       v = generator.next();
 //       console.log('第一次运行next方法', v);
 //     } catch (err) {
-//       console.log('捕捉错误', v);
+//       console.log('捕捉错误1', v);
 //     }
 //     try {
-//       v = generator.next();
+//       v2 = generator.next(); // 直接出去了，没有进行返回值的修改，等号左侧没有执行
 //       console.log('第二次运行next方法', v);
 //     } catch (err) {
-//       console.log('捕捉错误', v);
+//       console.log('捕捉错误2', v2);
 //     }
 //     try {
 //       v = generator.next();
 //       console.log('第三次运行next方法', v);
 //     } catch (err) {
-//       console.log('捕捉错误', v);
+//       console.log('捕捉错误3', v);
 //     }
 //     console.log('caller done');
 //   }
@@ -206,11 +263,12 @@
 //     return result;
 //   };
   
-//   const gen = g(1, 2);
-//   console.log(gen.next()); // Object {value: 3, done: false}
+  // const gen = g(1, 2);
+  // console.log(gen.next()); // Object {value: 3, done: false}
+  // console.log(gen.next()); // Object {value: 3, done: false}
   
-// //   console.log(gen.next(1)); // Object {value: 1, done: true}
-// //   gen.throw(new Error('出错了')); // Uncaught Error: 出错了
+  // console.log(gen.next(1)); // Object {value: 1, done: true}
+  // gen.throw(new Error('出错了')); // Uncaught Error: 出错了
 
 // console.log(gen.return(4));
 
@@ -221,15 +279,44 @@
 //   }
 
 //   function* bar() {
-//       yield 'x';
+//       // yield 'x';
 //       var value = yield* foo();
-//       yield value;
-//       yield 'y';
+//       console.log('value:', value);
+//       // yield value;
+//       // yield* foo();
+//       // yield 'y';
 //   }
 
-//   for(let o of bar()) {
-//       console.log(o);
-//   }
+//   var ff = bar();
+  
+// console.log(ff.next())
+// console.log(ff.next())
+// console.log(ff.next())
+// console.log(ff.next())
+
+  // for(let o of bar()) {
+  //     console.log(o);
+  // }
+// console.log([...bar()])
+// let delegatedIterator = (function* () {
+//   yield 'Hello!';
+//   yield 'Bye!';
+//   return 'return';
+// }());
+
+// let delegatingIterator = (function* () {
+//   yield 'Greetings!';
+//   yield* delegatedIterator;
+//   yield 'Ok, bye.';
+// }());
+
+// var arr = [1, 3, 4];
+// for (let a of arr) {
+//   console.log(a);
+// }
+// for(let value of delegatingIterator) {
+//   console.log(value);
+// }
 
 // function* genFuncWithReturn() {
 //     yield 'a';
@@ -259,6 +346,17 @@
 //     console.log(x);
 //   }
 
+// var a = 12;
+// function* g() {
+//   this.a = 11;
+// }
+// g.prototype.hello = function() {
+//   return 'hi';
+// }
+// let obj = g();
+// console.log(obj instanceof g);
+// console.log(obj.hello());
+// console.log(obj.a);
 // function* main() {
 //     var result = yield request("http://some.url");
 //     var resp = result;
@@ -331,15 +429,168 @@
 // arr2[Symbol.isConcatSpreadable] = false;
 // console.log(arr1.concat(arr2));
 
-class MyArray extends Array {
-  static get [Symbol.species]() { return Array; }
+// class MyArray extends Array {
+//   static get [Symbol.species]() { return Array; }
+// }
+
+// const a = new MyArray();
+// const b = a.map(x => x);
+
+// b instanceof MyArray // false
+// b instanceof Array // true
+
+// console.log(b instanceof MyArray) // true
+// console.log(b instanceof Array) // true
+
+// function* F() {
+//   this.a = 1;
+//   yield this.b = 2;
+//   yield this.c = 3;
+// }
+
+// var f = F.call(F.prototype);
+
+// console.log(f.next());
+// console.log(f.next());
+// console.log(f.a);
+// console.log(f.b);
+// console.log(f.c);
+
+// function* gen(x) {
+//   var y = yield x + 2;
+//   console.log('y:', y);
+//   return y;
+// }
+
+// var g = gen(1);
+// console.log(g.next()) // { value: 3, done: false }
+// console.log(g.next()) // { value: undefined, done: true }
+
+// function testPro(a) {
+//   return new Promise(function(resolve) {
+//     resolve(a);
+//   });
+// }
+
+// var gen = function* (){
+//   var f1 = yield testPro('a');
+//   var f2 = yield testPro('b');
+//   console.log(f1);
+//   console.log(f2);
+// }
+
+// var g = gen();
+// g.next().value.then(function(data) {
+//   console.log('1:', data);
+//   g.next(data).value.then(function(data) {
+//     console.log('2:', data);
+//     // 执行后边的打印
+//     g.next(data);
+//   })
+// })
+
+// function run(gen) {
+//   var g = gen();
+
+//   function next(data) {
+//     console.log('next:', data);
+//     var result = g.next(data);
+//     console.log(result);
+//     if (result.done) return result.value;
+//     result.value.then(function(data) {
+//       console.log('then:', data);
+//       next(data);
+//     });
+//   }
+
+//   next();
+// }
+
+// run(gen);
+
+// function testPro(a) {
+//   return new Promise(function(resolve, reject) {
+//     if (a === 'x') {
+//       reject(a);
+//     } else {
+//       resolve(a);
+//     }
+    
+//   });
+// }
+
+// const asyncGen = async function() {
+//   const f1 = await testPro('a');
+//   const f2 = await testPro('b');
+//   console.log(typeof f2);
+//   console.log(f1.toString());
+//   console.log(f2.toString());
+//   return f2;
+// }
+
+// asyncGen().then((data) => {
+//   console.log('then:', data);
+// });
+
+// function timeout(ms) {
+//   return new Promise((resolve) => {
+//     console.log('await run');
+//     setTimeout(resolve, ms);
+//   });
+// }
+
+// async function testAsync(value, ms) {
+//   console.log('start');
+//   await timeout(ms);
+//   console.log(value);
+//   console.log('end');
+// }
+
+// testAsync('hello', 2000);
+
+// async function f() {
+//   // return 'hello world';
+//   throw new Error('出错了');
+// }
+
+// f().then(
+//   v => console.log(v)
+// ).catch(
+//   e => console.log(e)
+// )
+
+// function sleep(interval) {
+//   return new Promise(function(resolve) {
+//     setTimeout(resolve, interval);
+//   });
+// }
+
+// async function one2five() {
+//   for(let i = 1; i <= 5; i++) {
+//     console.log(i);
+//     await sleep(1000);
+//   }
+// }
+
+// one2five();
+
+function testPro(a) {
+  return new Promise(function(resolve, reject) {
+    if (a === 'x') {
+      reject(a);
+    } else {
+      resolve(a);
+    }
+    
+  });
 }
-
-const a = new MyArray();
-const b = a.map(x => x);
-
-b instanceof MyArray // false
-b instanceof Array // true
-
-console.log(b instanceof MyArray) // true
-console.log(b instanceof Array) // true
+async function f() {
+  try {
+    await testPro('x');
+  } catch(e) {
+    console.error(e);
+  }
+  const result = await testPro('hello world');
+  console.log(result);
+}
+f();

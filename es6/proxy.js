@@ -1,27 +1,40 @@
 // var obj = new Proxy({}, {
-//     get: function (target, key, receiver) {
-//       console.log(`getting ${key}!`);
-//       return Reflect.get(target, key, receiver);
-//     },
-//     set: function (target, key, value, receiver) {
-//       console.log(`setting ${key}!`);
-//       return Reflect.set(target, key, value, receiver);
-//     }
-//   });
+//   get: function(target, propKey, receiver) {
+//     console.log(`getting: ${propKey}`);
+//     return Reflect.get(target, propKey, receiver);
+//   },
+//   set: function(target, propKey, value, receiver) {
+//     console.log(`setting ${propKey}, ${value}`);
+//     return Reflect.set(target, propKey, value, receiver);
+//   }
+// });
 
-//   obj.count = 1;
-//   ++obj.count;
-
-//   console.log(obj.count);
+// obj.count = 1;
+// console.log(++obj.count);
+// console.log(obj.count++);
 
 // proxy
 // const proxy = new Proxy({}, {
-//     get: function() {
-//         return 42;
-//     }
-// });
+//   get: function(target, propKey) {
+//     console.log(propKey);
+//     return 42;
+//   }
+// })
 
 // console.log(proxy.time);
+
+// var target = {
+//   a: 'a',
+// };
+// var handler = {};
+// var proxy = new Proxy(target, handler);
+// console.log(proxy);
+// proxy.a = 'b';
+// console.log(target.a);
+// var object = { proxy: new Proxy(target, handler) };
+// object.proxy.a = 'b';
+// console.log(object.proxy);
+// console.log(target.a);
 
 // reduce
 
@@ -78,3 +91,32 @@
 // .then(v => console.log(v))
 // .catch(e => console.log(e))
 // 出错了
+
+var handler = {
+  get: function(target, name) {
+    if (name === 'prototype') {
+      return Object.prototype;
+    }
+    return 'Hello, ' + name;
+  },
+
+  apply: function(target, thisBinding, args) {
+    console.log(thisBinding);
+    console.log(args);
+    return args[0];
+  },
+
+  construct: function(target, args) {
+    return {value: args[1]};
+  }
+}
+
+var fproxy = new Proxy(function(x, y) {
+  return x + y;
+}, handler);
+
+console.log(fproxy(1, 2));
+console.log(new fproxy(1, 2));
+
+console.log(fproxy.prototype === Object.prototype);
+console.log(fproxy.foo);
