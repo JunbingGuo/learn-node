@@ -77,35 +77,41 @@
 //     console.log(value); // 0, 1, 2
 //   }
 
-// function Obj(value) {
-//     this.value = value;
-//     this.next = null;
-//   }
+function Obj(value) {
+    this.value = value;
+    this.next = null;
+  }
   
-//   Obj.prototype[Symbol.iterator] = function() {
-//     var iterator = { next: next };
+  Obj.prototype[Symbol.iterator] = function() {
+    var iterator = { next: next };
   
-//     var current = this;
+    var current = this;
   
-//     function next() {
-//         console.log(current);
-//       if (current) {
-//         var value = current.value;
-//         current = current.next;
-//         return { done: false, value: value };
-//       } else {
-//         return { done: true };
-//       }
-//     }
-//     return iterator;
-//   }
+    function next() {
+        console.log(current);
+      if (current) {
+        var value = current.value;
+        current = current.next;
+        return { done: false, value: value };
+      } else {
+        return { done: true };
+      }
+    }
+    return iterator;
+  }
   
-//   var one = new Obj(1);
-//   var two = new Obj(2);
-//   var three = new Obj(3);
+  var one = new Obj(1);
+  var two = new Obj(2);
+  var three = new Obj(3);
   
-//   one.next = two;
-//   two.next = three;
+  one.next = two;
+  two.next = three;
+
+  const aa = two[Symbol.iterator]();
+  console.log(aa.next())
+  console.log(aa.next())
+  console.log(aa.next())
+  // console.log(aa.next())
   
 // //   for (var i of one){
 // //     console.log(i); // 1, 2, 3
@@ -122,7 +128,7 @@
 
 // for(let v of arr) {
 //   console.log(v); // red green blue
-console.log(engines.keys());
+// console.log(engines.keys());
 // }
 
 // var arr = ['a', 'b', 'c', 'd'];
@@ -140,9 +146,27 @@ console.log(engines.keys());
 //   console.log(pair);
 // }
 
-var engines = new Set(["Gecko", "Trident", "Webkit", "Webkit"]);
+// var engines = new Set(["Gecko", "Trident", "Webkit", "Webkit"]);
 // for (let e of engines) {
 //   console.log(e);
 // }
-console.log(engines.keys());
-console.log(engines.values());
+// console.log(engines.keys());
+// console.log(engines.values());
+
+// const someStr = 'hi';
+// console.log(typeof(someStr[Symbol.iterator]));
+
+// const iterator = someStr[Symbol.iterator]();
+
+// console.log(iterator);
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.next());
+
+// var myIterable = {};
+// myIterable[Symbol.iterator] = function* () {
+//   yield 1;
+//   yield 2;
+//   yield 3;
+// };
+// console.log([...myIterable]); 

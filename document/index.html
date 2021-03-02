@@ -4,9 +4,117 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- <base href="https://www.baidu.com"> -->
   </head>
   <body>
 
   </body>
-  <script src="dom.js"></script>
+  
+  <div class="ceshi bg" id="testDiv">测试div
+    <a id="testA" href="javascript: new Date().toLocaleTimeString();">点击</a><a href="javascript:console.log('Hello')">点击</a>
+  </div>
+  
+  
+  <div class="parent"><div id="con">
+    <p>
+      <span>hello world</span>
+      <a>test</a>
+    </p>
+  </div></div>
+  <!-- <script src="dom.js"></script> -->
+  <!-- <script id="mydata" type="x-custom-data">
+    console.log('text');
+  </script> -->
+  <script>
+    /* ar test = document.getElementById('mydata');
+    console.log(test.text);
+    var script = document.createElement('script');
+    script.src = 'dom.js';
+    document.body.appendChild(script); */
+
+    // var div = document.getElementById('testDiv');
+    // var aEle = document.getElementById('testA');
+    // var con = document.getElementById('con');
+    // console.log(div.nodeType, Node.ELEMENT_NODE)
+    // console.log(document.nodeType, Node.DOCUMENT_NODE)
+    // console.log(div.nodeName, aEle.nodeName)
+    // console.log(div.attributes[0].nodeName)
+    // console.log(div.attributes[0].nodeValue)
+    // console.log(div.nodeValue)
+    // console.log(div.firstChild.nodeValue);
+    
+    // console.log(con.textContent);
+    // console.log(document.documentElement.textContent);
+    // setTimeout(function() {
+    //   con.textContent = '<h1>2222</h1>';
+    // }, 3000)
+
+    // console.log(document.baseURI)
+    // console.log(con.ownerDocument)
+    // console.log(document.ownerDocument)
+
+    // console.log(div.previousSibling)
+    // console.log(aEle.nextSibling)
+    // console.log(con.parentNode)
+    // console.log(con.parentElement);
+    // console.log(div.firstChild)
+    // console.log(div.lastChild)
+    // console.log(div.childNodes);
+    // console.log(document.childNodes)
+
+
+    // var div = document.getElementById('testDiv');
+    // var aEle = document.getElementById('testA');
+    // var con = document.getElementById('con');
+    // console.log(div.isConnected);
+    // var createP = document.createElement('p');
+    // console.log(createP.isConnected)
+    // createP.textContent = '添加的p元素';
+    // div.appendChild(createP);
+    // div.appendChild(con)
+    // console.log(div.hasChildNodes());
+    // div.insertBefore(createP, aEle)
+    // div.insertBefore(createP, aEle.nextSibling)
+    // const fruits = ['Apple', 'Orange', 'Banana', 'Melon'];
+
+    // const fragment = document.createDocumentFragment();
+
+    // fruits.forEach(fruit => {
+    //   const li = document.createElement('li');
+    //   li.innerHTML = fruit;
+    //   fragment.appendChild(li);
+    // });
+    // div.insertBefore(fragment, aEle.nextSibling);
+    // // div.removeChild(aEle);
+    // var teta = document.createElement('a');
+    // teta.textContent = '新的元素'
+    // div.replaceChild(teta, aEle);
+    // console.log(div.contains(aEle))
+    // console.log(div.contains(teta))
+    // var children = document.body.childNodes;
+    // console.log(children instanceof NodeList)
+    // console.log(Array.isArray(children))
+    // console.log(children.length)
+    // console.log(document.body.children.length)
+    // console.log(aEle.firstElementChild);
+    // console.log(div.childElementCount);
+    // console.log(div.childNodes.length);
+
+
+    var div = document.getElementById('testDiv');
+    var aEle = document.getElementById('testA');
+    var con = document.getElementById('con');
+    console.log(div.isConnected);
+    var createP = document.createElement('p');
+    console.log(createP.isConnected)
+    createP.textContent = '添加的p元素';
+    div.insertBefore(createP, aEle.nextSibling)
+    
+    var teta = document.createElement('a');
+    teta.textContent = '新的元素'
+
+    // aEle.remove();
+    // aEle.before(teta)
+    aEle.after(teta, 'qqqqq')
+  </script>
 </html>

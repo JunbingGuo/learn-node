@@ -139,10 +139,11 @@ test(4, 5, 6)('a', 'b');
 
 // var test = Number('123aa');
 // console.log(test);
-var s1 = Symbol('test');
+// var s1 = Symbol('test');
 // console.log(typeof s);
 
 // console.log(s.toString());
-let a = {};
-a[s1] = 123;
-console.log(a[s1]);
+// let a = {};
+// a[s1] = 123;
+// console.log(a[s1]);
+

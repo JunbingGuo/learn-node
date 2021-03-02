@@ -1,0 +1,36 @@
+/* .wrap {
+  width: 300px;
+  height: 300px;
+  background: red;
+}
+
+.content {
+  position: static;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+  background: blue;
+} */
+
+.parent {
+  width: 500px;
+  height: 500px;
+  background: #ccc;
+  position: absolute;
+  overflow: auto;
+}
+
+.son {
+  width: 300px;
+  height: 300px;
+  background: #aaa;
+  position: relative;
+  right: 0;
+}
+
+span {
+  position: absolute;
+  width: 100px;
+  right: -300px;
+  background: #888;
+}
